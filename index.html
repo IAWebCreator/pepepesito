@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEPEPESITO - Meme Token</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Press+Start+2P&display=swap');
+
+        :root {
+            --primary-color: #00ff00;
+            --secondary-color: #ffd700;
+            --background-color: #f5e5b7;
+            --text-color: #333;
+            --accent-color: #ff69b4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            opacity: 0.3;
+            z-index: -1;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 48px;
+            color: var(--primary-color);
+            text-shadow: 2px 2px var(--secondary-color);
+            margin-bottom: 20px;
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px, 0) skew(0deg); }
+            4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+            62% { transform: translate(0, 0) skew(5deg); }
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .about-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .tokenomics-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tokenomics-list li {
+            font-size: 18px;
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .tokenomics-list li::before {
+            content: "🐸";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .how-to-buy-steps {
+            counter-reset: step-counter;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .how-to-buy-steps li {
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding-left: 50px;
+            position: relative;
+        }
+
+        .how-to-buy-steps li::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .roadmap {
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: var(--primary-color);
+        }
+
+        .roadmap-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .roadmap-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 45%;
+        }
+
+        .roadmap-item:nth-child(odd) .roadmap-content {
+            margin-left: auto;
+        }
+
+        .roadmap-item::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .token-address {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .roadmap::before {
+                left: 20px;
+            }
+
+            .roadmap-content {
+                width: calc(100% - 50px);
+                margin-left: 50px !important;
+            }
+
+            .roadmap-item::before {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tokenomics">Tokenomics</a></li>
+                <li><a href="#how-to-buy">How to Buy</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>PEPEPESITO</h1>
+                <p>Laugh your way to the moon with the most hilarious meme token!</p>
+                <a href="#how-to-buy" class="btn">Buy Now</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About PEPEPESITO</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Prepare to laugh your way to the moon with PEPEPESITO! Combining the rib-tickling charm of your favorite meme with the star-studded allure of celebrity names, PEPEPESITO is the latest sensation sweeping the crypto scene. Join our hilarious community where Pepe takes center stage in the limelight, bringing humor and fortune together like never before. 💸🌟</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://placeholder.com/400x400" alt="PEPEPESITO mascot">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tokenomics" class="section">
+            <div class="container">
+                <h2>TOKENOMICS</h2>
+                <ul class="tokenomics-list">
+                    <li>Total Supply: 1,000,000,000,000 PEPEP</li>
+                    <li>Liquidity Pool: 50% locked for 1 year</li>
+                    <li>Marketing Wallet: 5%</li>
+                    <li>Community Rewards: 3% redistribution to holders</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="how-to-buy" class="section">
+            <div class="container">
+                <h2>HOW TO BUY</h2>
+                <ol class="how-to-buy-steps">
+                    <li>Get a Wallet - Download a reputable Ethereum wallet like MetaMask or Trust Wallet.</li>
+                    <li>Acquire ETH - Purchase Ethereum (ETH) from a cryptocurrency exchange like Coinbase or Binance.</li>
+                    <li>Connect to a DEX - Connect your wallet to a decentralized exchange (DEX) like Uniswap or SushiSwap.</li>
+                    <li>Swap ETH for PEPEP - Use the DEX's swap feature to exchange your ETH for PEPEP.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h2>ROADMAP</h2>
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 1: Launch & Community Building</h3>
+                            <p>We'll launch the token and focus on growing a strong, meme-loving community.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 2: Marketing & Partnerships</h3>
+                            <p>We'll ramp up marketing efforts and form strategic partnerships with influencers and meme creators.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 3: PEPEPESITO Meme Factory</h3>
+                            <p>We'll develop a platform for creating and sharing PEPEPESITO-themed memes, with rewards for the best content.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-item">
+                        <div class="roadmap-content">
+                            <h3>Phase 4: PEPEPESITO Goes Hollywood</h3>
+                            <p>We'll explore opportunities in entertainment, including animated shorts and merchandise collaborations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="token-address">
+                <span>Contract Address: 0x1234...5678</span>
+                <i class="fas fa-copy copy-icon" id="copyAddress"></i>
+            </div>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fas fa-chart-line"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="#" target="_blank"><i class="fas fa-search-dollar"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animated background
+        const hero = document.querySelector('.hero');
+        let angle = 0;
+        function animateBackground() {
+            angle += 0.5;
+            hero.style.backgroundImage = `linear-gradient(${angle}deg, var(--primary-color), var(--secondary-color), var
